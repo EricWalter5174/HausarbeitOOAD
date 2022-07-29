@@ -1,16 +1,17 @@
 package logic;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
+import entities.Kategorie;
 import entities.Lagerbar;
 import entities.Lagerort;
-import utility.Kategorie;
 
 public class LagerbarBuilder {
 	private String name;
 	private Lagerort lagerort;
 	private double preis;
-	private Date mindesthaltbarkeit;
+	private LocalDate mindesthaltbarkeit;
 	private Kategorie kategorie;
 	
 	public LagerbarBuilder() {}
@@ -24,8 +25,8 @@ public class LagerbarBuilder {
 		return this;
 	}
 
-	public LagerbarBuilder setLagerort(Lagerort lagerort) {
-		this.lagerort = lagerort;
+	public LagerbarBuilder setLagerort(String name) {
+		this.lagerort = new Lagerort(name);
 		return this;
 	}
 
@@ -34,13 +35,16 @@ public class LagerbarBuilder {
 		return this;
 	}
 	
-	public LagerbarBuilder setMindesthaltbarkeit(Date date) {
-		this.mindesthaltbarkeit = date;
+	public LagerbarBuilder setMindesthaltbarkeit(String s) {
+		//https://www.baeldung.com/java-string-to-date
+		//Das Datum besitzt BASIC ISO DATE Form JAHR-MONAT-TAG 
+		//Bsp: 20231230 = 30.12.2023
+		this.mindesthaltbarkeit = LocalDate.parse(s, DateTimeFormatter.BASIC_ISO_DATE);
 		return this;
 	}
 	
-	public LagerbarBuilder setKategorie(Kategorie kategorie) {
-		this.kategorie = kategorie;
+	public LagerbarBuilder setKategorie(String s) {
+		this.kategorie = new Kategorie(s);
 		return this;
 	}
 	
