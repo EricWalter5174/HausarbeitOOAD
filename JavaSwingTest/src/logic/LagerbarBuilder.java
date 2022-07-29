@@ -44,11 +44,34 @@ public class LagerbarBuilder {
 	}
 	
 	public LagerbarBuilder setKategorie(String s) {
-		this.kategorie = new Kategorie(s);
+		if(s != null) {
+			if(!isInt(s)) { 								//wenn kein Integer, setze Kategorie auf Defaultwert
+				this.kategorie = Kategorie.UNDEFINED;
+				return this;
+			}
+			int x = Integer.parseInt(s);
+			if (x >= 0 && x <= Kategorie.values().length) { //Wert ist ein gültiges Ordinal
+				this.kategorie = Kategorie.values()[x];
+			}else {
+				this.kategorie = Kategorie.UNDEFINED;
+			}
+		}
 		return this;
 	}
 	
 	public Lagerbar build() {
 		return new Lagerbar(name, lagerort, preis, mindesthaltbarkeit, kategorie);
+	}
+	
+	//Hilfsmethode, um String auf Integer zu prüfen 
+	public boolean isInt(String str) {
+	  	try {
+	      	@SuppressWarnings("unused")
+	    	int x = Integer.parseInt(str);
+	      	return true; 						//String ist ein Integer
+		} catch (NumberFormatException e) {
+	    	return false; 						//String ist kein Integer
+		}
+	  	
 	}
 }
