@@ -1,3 +1,9 @@
+/**
+ * Helferklasse zum Laden und Speichern von Testdaten aus einem Textdokument.
+ * 
+ * @author Eric Walter
+ */
+
 package utility;
 
 import java.io.File;
@@ -5,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 import entities.Lagerbar;
@@ -18,7 +25,9 @@ public class LoadAndSaveHelper {
 	}
 	
 	public ArrayList<Lagerbar> ladeDaten(File f) throws FileNotFoundException {
+		liste = new ArrayList<>();
 		scanner = new Scanner(f);
+		scanner.useLocale(Locale.US);
 		while(scanner.hasNextLine()) {
 			liste.add(new LagerbarBuilder()
 					.setName(scanner.next())
@@ -32,7 +41,7 @@ public class LoadAndSaveHelper {
 	}
 	
 	public void speichereDaten() throws IOException {
-		FileWriter fw = new FileWriter(new File("daten/testdaten.txt"));
+		FileWriter fw = new FileWriter(new File("src/daten/testdaten.txt"));
 		for(Lagerbar l : liste) {
 			fw.write(l.toString());
 		}

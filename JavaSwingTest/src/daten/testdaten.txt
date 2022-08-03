@@ -1,0 +1,4 @@
+testname testort 1.23 20231230 0
+Apfel Kabuff 0.50 20231230 1
+Fahrradreifen Garage 16.00 00000101 5
+UngültigeKategorieTest testort 1.0 00000101 -7

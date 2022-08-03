@@ -1,3 +1,9 @@
+/**
+ * Simple Java-Klasse für Lagerorte, die vom Nutzer erstellt werden können sollen
+ * 
+ * @author Giuseppe Buccellato, Eric Walter
+ */
+
 package entities;
 
 public class Lagerort {

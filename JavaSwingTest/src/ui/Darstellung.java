@@ -1,3 +1,9 @@
+/**
+ * Darstellungsklasse für das Applikationsfenster und das UI.
+ * 
+ * @author Giuseppe Buccellato, Eric Walter
+ */
+
 package ui;
 import java.awt.Container;
 import java.awt.FlowLayout;
@@ -6,9 +12,6 @@ import javax.swing.*;
 
 public class Darstellung extends JFrame {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 190019651065330528L;
 
 	public Darstellung() {
