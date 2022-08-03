@@ -1,3 +1,9 @@
+/**
+ * Main-Klasse zum Instanziieren der Applikation.
+ *  
+ * @author Giuseppe Buccellato, Eric Walter
+ */
+
 package main;
 import logic.Applikation;
 

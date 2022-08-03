@@ -1,3 +1,10 @@
+/**
+ * Klasse für die Instanziierung der Applikation als Singleton.
+ * Die Darstellung sowie die Verwaltung werden hier erzeugt.
+ * 
+ * @author Eric Walter
+ */
+
 package logic;
 import ui.Darstellung;
 

@@ -1,3 +1,9 @@
+/**
+ * Simple Java-Entität für Lagerbar-Objekte
+ * 
+ * @author Giuseppe Buccellato, Eric Walter
+ */
+
 package entities;
 
 import java.time.LocalDate;
@@ -39,7 +45,7 @@ public class Lagerbar {
 
 	@Override
 	public String toString() {
-		return name + " " + lagerort + " " + preis  + " " + mindesthaltbarkeit + " " + kategorie;
+		return name + " " + lagerort.getName() + " " + preis  + " " + mindesthaltbarkeit + " " + kategorie;
 	}
 	
 	

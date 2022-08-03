@@ -1,3 +1,9 @@
+/**
+ * Builder-Klasse für Lagerbar-Objekte
+ * 
+ * @author Giuseppe Buccellato, Eric Walter
+ */
+
 package logic;
 
 import java.time.LocalDate;
@@ -63,14 +69,16 @@ public class LagerbarBuilder {
 		return new Lagerbar(name, lagerort, preis, mindesthaltbarkeit, kategorie);
 	}
 	
-	//Hilfsmethode, um String auf Integer zu prüfen 
+	/**
+	 * Hilfsmethode, um String auf Integer zu prüfen
+	 */
 	public boolean isInt(String str) {
 	  	try {
-	      	@SuppressWarnings("unused")
+	      	@SuppressWarnings("unused")			//Weil int x nur geprüft wird
 	    	int x = Integer.parseInt(str);
-	      	return true; 						//String ist ein Integer
+	      	return true; 						//String enthält Integer
 		} catch (NumberFormatException e) {
-	    	return false; 						//String ist kein Integer
+	    	return false; 						//String enthält keinen Integer
 		}
 	  	
 	}
