@@ -9,6 +9,7 @@
 package logic;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Set;
 
 import entities.Lagerbar;
 import entities.LagerbarModel;
@@ -20,8 +21,13 @@ public class Verwaltung {
 	private LagerbarModel lagerbarModel;
 	
 	public Verwaltung() {
-		lagerView = new LagerbarView();
+		initModel();
+		lagerView = new LagerbarView(lagerbarModel.getListe(), lagerbarModel.getOrte());
 		lagerbarBuilder = new LagerbarBuilder();
+		
+	}
+	
+	private void initModel() {
 		try {
 			lagerbarModel = new LagerbarModel();
 			//Testausgabe

@@ -9,6 +9,7 @@ import java.awt.Container;
 import java.awt.FlowLayout;
 
 import javax.swing.*;
+import javax.swing.table.TableModel;
 
 public class Darstellung extends JFrame {
 	
@@ -35,10 +36,16 @@ public class Darstellung extends JFrame {
 		
 		JButton beenden = new JButton("Beenden");
 		
+//		TableModel model
+//		JTable lagerbarTabelle = new JTable(model);
+//		JScrollPane lagerbarScrollPane = new JScrollPane();
+		
 		beenden.setVisible(true);
 		container.add(beenden);
 		
 	}
+	
+	//TODO: Daten aus View darstellen!
 	
 	
 }
