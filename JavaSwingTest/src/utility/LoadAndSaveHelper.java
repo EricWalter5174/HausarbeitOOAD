@@ -27,7 +27,7 @@ public class LoadAndSaveHelper {
 	public ArrayList<Lagerbar> ladeDaten(File f) throws FileNotFoundException {
 		liste = new ArrayList<>();
 		scanner = new Scanner(f);
-		scanner.useLocale(Locale.US);
+		scanner.useLocale(Locale.US); //sonst gibt's Probleme mit dem Double einlesen
 		while(scanner.hasNextLine()) {
 			liste.add(new LagerbarBuilder()
 					.setName(scanner.next())
@@ -40,8 +40,12 @@ public class LoadAndSaveHelper {
 		return liste;
 	}
 	
+	/*
+	 * Die Speichermethode wird Probleme machen, da z.B. das MHD nicht im gleichen Format geschrieben wie es gelesen wird.
+	 * Die Kategorie wird als Wort ausgeschrieben, während sie als Integer eingelesen wird.
+	 */
 	public void speichereDaten() throws IOException {
-		FileWriter fw = new FileWriter(new File("src/daten/testdaten.txt"));
+		FileWriter fw = new FileWriter(new File("src/daten/testdaten2.txt"));
 		for(Lagerbar l : liste) {
 			fw.write(l.toString());
 		}

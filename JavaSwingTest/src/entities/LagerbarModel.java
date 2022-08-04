@@ -15,20 +15,37 @@ import utility.LoadAndSaveHelper;
 
 public class LagerbarModel {
 	private ArrayList<Lagerbar> liste;
+	private ArrayList<Lagerort> orte;
 	private LoadAndSaveHelper loader;
 	
 	public LagerbarModel() throws FileNotFoundException {
 		loader = new LoadAndSaveHelper();
-		//System.out.println(new File(".").getAbsolutePath());
 		liste = loader.ladeDaten(new File("src/daten/testdaten.txt"));
+		initOrte();
 	}
 
 	public ArrayList<Lagerbar> getListe() {
 		return liste;
 	}
+	
+	public ArrayList<Lagerort> getOrte(){
+		return orte;
+	}
 
 	public LoadAndSaveHelper getLoader() {
 		return loader;
+	}
+	
+	//TODO: Lagerorte Duplikate filtern, evtl mit Set?
+	private void initOrte() {
+		this.orte = new ArrayList<>();
+		
+		for(Lagerbar l : this.liste) {
+			orte.add(l.getLagerort());
+		}
+//		for(Lagerort o : orte) {
+//			System.out.println(o.getName());
+//		}
 	}
 	
 }
