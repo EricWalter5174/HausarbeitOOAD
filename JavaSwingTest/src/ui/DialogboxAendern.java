@@ -1,3 +1,10 @@
+/**
+ * Dialogbox zum Ändern eines Eintrags.
+ * @param modal auf true gesetzt, damit der Fokus auf den Dialog beibehalten wird.
+ * 
+ * @author Giuseppe Buccellato, Eric Walter
+ */
+
 package ui;
 
 import java.awt.BorderLayout;
@@ -11,25 +18,13 @@ import javax.swing.JLabel;
 
 public class DialogboxAendern extends JDialog {
 
+	private static final long serialVersionUID = 1L;
+	
 	private final JPanel contentPanel = new JPanel();
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			DialogboxAendern dialog = new DialogboxAendern();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Create the dialog.
-	 */
-	public DialogboxAendern() {
+	public DialogboxAendern(String title, boolean modal) {
+		setTitle(title);
+		setModal(modal);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());

@@ -1,49 +1,32 @@
+/**
+ * Darstellungsklasse für die Verwaltung der UI-Elemente und Dialogboxen
+ * 
+ * @author Giuseppe Buccellato, Eric Walter
+ */
+
 package ui;
 
 import javax.swing.*;
 import javax.swing.table.TableModel;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
 import java.awt.BorderLayout;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+
 import javax.swing.border.TitledBorder;
-import javax.swing.JButton;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 public class Darstellung {
 
 	private JFrame frmDigitalerVorratsschrank;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Darstellung window = new Darstellung();
-					window.frmDigitalerVorratsschrank.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
 	public Darstellung() {
 		initialize();
+		frmDigitalerVorratsschrank.setVisible(true);
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
 		frmDigitalerVorratsschrank = new JFrame();
 		frmDigitalerVorratsschrank.setTitle("Digitaler Vorratsschrank");
@@ -71,25 +54,38 @@ public class Darstellung {
 		
 		JButton btnHinzu = new JButton("Hinzufügen");
 		panel_1.add(btnHinzu);
-		
+		btnHinzu.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JDialog dialog = new DialogboxHinzu("Eintrag hinzufügen", true);
+				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				dialog.setVisible(true);
+			}
+		});
+
 		JButton btnAendern = new JButton("Ändern");
 		panel_1.add(btnAendern);
+		btnAendern.addActionListener(new ActionListener() {	
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JDialog dialog = new DialogboxAendern("Eintrag ändern", true);
+				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				dialog.setVisible(true);		
+			}
+		});
 		
 		JButton btnEntfernen = new JButton("Entfernen");
 		panel_1.add(btnEntfernen);
+		btnEntfernen.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JDialog dialog = new DialogboxEntfernen("Eintrag entfernen", true);
+				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				dialog.setVisible(true);
+			}
+		});
+
 	}
-	
-//	private void initialisiereContainer() {
-//		Container container = getContentPane();
-//		container.setLayout(new FlowLayout());
-//		
-//		JButton beenden = new JButton("Beenden");
-//		
-//		
-//		beenden.setVisible(true);
-//		container.add(beenden);
-//		
-//	}
 	
 	//TODO: Daten aus View darstellen!
 	

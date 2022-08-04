@@ -1,3 +1,10 @@
+/**
+ * Dialogbox zum Entfernen eines Eintrags.
+ * @param modal auf true gesetzt, damit der Fokus auf den Dialog beibehalten wird.
+ * 
+ * @author Giuseppe Buccellato, Eric Walter
+ */
+
 package ui;
 
 import java.awt.BorderLayout;
@@ -13,23 +20,9 @@ public class DialogboxEntfernen extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			DialogboxEntfernen dialog = new DialogboxEntfernen();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Create the dialog.
-	 */
-	public DialogboxEntfernen() {
+	public DialogboxEntfernen(String title, boolean modal) {
+		setTitle(title);
+		setModal(modal);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());
