@@ -8,9 +8,6 @@
 
 package logic;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-
-import entities.Lagerbar;
 import entities.LagerbarModel;
 import views.LagerbarView;
 
