@@ -1,51 +1,96 @@
-/**
- * Darstellungsklasse für das Applikationsfenster und das UI.
- * 
- * @author Giuseppe Buccellato, Eric Walter
- */
-
 package ui;
-import java.awt.Container;
-import java.awt.FlowLayout;
 
 import javax.swing.*;
 import javax.swing.table.TableModel;
+import java.awt.EventQueue;
 
-public class Darstellung extends JFrame {
-	
-	private static final long serialVersionUID = 190019651065330528L;
+import javax.swing.JFrame;
+import java.awt.BorderLayout;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.border.TitledBorder;
+import javax.swing.JButton;
 
+import java.awt.GridLayout;
+
+
+public class Darstellung {
+
+	private JFrame frmDigitalerVorratsschrank;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Darstellung window = new Darstellung();
+					window.frmDigitalerVorratsschrank.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
 	public Darstellung() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frmDigitalerVorratsschrank = new JFrame();
+		frmDigitalerVorratsschrank.setTitle("Digitaler Vorratsschrank");
+		frmDigitalerVorratsschrank.setBounds(100, 100, 1280, 720);
+		frmDigitalerVorratsschrank.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmDigitalerVorratsschrank.getContentPane().setLayout(new BorderLayout(0, 0));
 		
-		initialisiereFenster();
-		initialisiereContainer();
-		//TODO: GridLayout recherchieren und hinzufuegen
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBorder(new TitledBorder("Vorrat"));
+		frmDigitalerVorratsschrank.getContentPane().add(scrollPane, BorderLayout.CENTER);
+		
+		JPanel panel_2 = new JPanel();
+		scrollPane.setViewportView(panel_2);
+		
+		JPanel panel_3 = new JPanel();
+		panel_2.add(panel_3);
+		
+		JPanel panel = new JPanel();
+		frmDigitalerVorratsschrank.getContentPane().add(panel, BorderLayout.EAST);
+		panel.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel_1 = new JPanel();
+		panel.add(panel_1, BorderLayout.SOUTH);
+		panel_1.setLayout(new GridLayout(3, 1, 0, 0));
+		
+		JButton btnHinzu = new JButton("Hinzufügen");
+		panel_1.add(btnHinzu);
+		
+		JButton btnAendern = new JButton("Ändern");
+		panel_1.add(btnAendern);
+		
+		JButton btnEntfernen = new JButton("Entfernen");
+		panel_1.add(btnEntfernen);
 	}
 	
-	private void initialisiereFenster() {
-		setTitle("Digitaler Vorratsschrank");
-		setSize(1280, 720);
-		setLocationRelativeTo(null);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setVisible(true);
-	}
-	
-	private void initialisiereContainer() {
-		Container container = getContentPane();
-		container.setLayout(new FlowLayout());
-		
-		JButton beenden = new JButton("Beenden");
-		
-//		TableModel model
-//		JTable lagerbarTabelle = new JTable(model);
-//		JScrollPane lagerbarScrollPane = new JScrollPane();
-		
-		beenden.setVisible(true);
-		container.add(beenden);
-		
-	}
+//	private void initialisiereContainer() {
+//		Container container = getContentPane();
+//		container.setLayout(new FlowLayout());
+//		
+//		JButton beenden = new JButton("Beenden");
+//		
+//		
+//		beenden.setVisible(true);
+//		container.add(beenden);
+//		
+//	}
 	
 	//TODO: Daten aus View darstellen!
-	
 	
 }
