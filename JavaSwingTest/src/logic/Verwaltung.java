@@ -8,34 +8,41 @@
 
 package logic;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Set;
 
-import entities.Lagerbar;
 import entities.LagerbarModel;
 import views.LagerbarView;
 
 public class Verwaltung {
 	private LagerbarView lagerView;
-	private LagerbarBuilder lagerbarBuilder;
+	private LagerbarBuilder lagerbarBuilder; //zum Erstellen neuer Objekte durch den User
 	private LagerbarModel lagerbarModel;
 	
 	public Verwaltung() {
 		initModel();
-		lagerView = new LagerbarView(lagerbarModel.getListe(), lagerbarModel.getOrte());
-		lagerbarBuilder = new LagerbarBuilder();
+		initView();
+		this.lagerbarBuilder = new LagerbarBuilder();
 		
 	}
 	
+	/**
+	 * initialisiert den Datensatz aus dem LagerbarModel
+	 */
 	private void initModel() {
 		try {
 			lagerbarModel = new LagerbarModel();
-			//Testausgabe
 			System.out.println("Testdatendatei geladen!");
-			System.out.println(lagerbarModel.getListe());
 		} catch (FileNotFoundException e) {
 			System.out.println("Keine Testdatendatei gefunden!");
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Initialisiert View mit Daten des Models
+	 */
+	private void initView() {
+		this.lagerView = new LagerbarView(lagerbarModel.getListe(), lagerbarModel.getOrte());
+	}
+	
+	//TODO: update View
 }

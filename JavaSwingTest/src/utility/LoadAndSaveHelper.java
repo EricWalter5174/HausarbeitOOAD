@@ -30,6 +30,7 @@ public class LoadAndSaveHelper {
 		scanner.useLocale(Locale.US); //sonst gibt's Probleme mit dem Double einlesen
 		while(scanner.hasNextLine()) {
 			liste.add(new LagerbarBuilder()
+					.setId(0)
 					.setName(scanner.next())
 					.setLagerort(scanner.next())
 					.setPreis(scanner.nextDouble())

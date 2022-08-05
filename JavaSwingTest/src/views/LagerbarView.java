@@ -11,8 +11,11 @@ import java.util.Set;
 
 import entities.Lagerbar;
 import entities.Lagerort;
+import ui.Darstellung;
 
 public class LagerbarView {
+	
+	private Darstellung darstellung;
 	
 	private ArrayList<Lagerbar> liste;
 	private ArrayList<Lagerort> orte;
@@ -20,6 +23,7 @@ public class LagerbarView {
 	public LagerbarView(ArrayList<Lagerbar> liste, ArrayList<Lagerort> orte) {
 		setListe(liste);
 		setOrte(orte);
+		this.darstellung = new Darstellung(liste);
 	}
 
 	public ArrayList<Lagerbar> getListe() {
@@ -38,6 +42,14 @@ public class LagerbarView {
 		this.orte = orte;
 	}
 	
-	
+	/**
+	 * Bekommt von der Verwaltung die Daten des LagerbarModels,
+	 * um die Darstellung im UI zu aktualisieren.
+	 * @param liste
+	 * @param orte
+	 */
+	public void initDarstellung(ArrayList<Lagerbar> liste, ArrayList<Lagerort> orte) {
+		
+	}
 	
 }
