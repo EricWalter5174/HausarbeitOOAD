@@ -8,6 +8,11 @@ package ui;
 
 import javax.swing.*;
 import javax.swing.table.TableModel;
+
+import entities.LagerTableModel;
+import entities.Lagerbar;
+import entities.Lagerort;
+
 import java.awt.EventQueue;
 import java.awt.BorderLayout;
 
@@ -16,33 +21,32 @@ import javax.swing.border.TitledBorder;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 
 public class Darstellung {
 
 	private JFrame frmDigitalerVorratsschrank;
+	private LagerTableModel lagerTableModel;
+	private JTable lagerTable;
 
-	public Darstellung() {
-		initialize();
+	public Darstellung(ArrayList<Lagerbar> liste) {
+		this.lagerTable = initTabelle(liste);
+		initDarstellung(this.lagerTable);
 		frmDigitalerVorratsschrank.setVisible(true);
 	}
 
-	private void initialize() {
+	private void initDarstellung(JTable table) {
 		frmDigitalerVorratsschrank = new JFrame();
 		frmDigitalerVorratsschrank.setTitle("Digitaler Vorratsschrank");
 		frmDigitalerVorratsschrank.setBounds(100, 100, 1280, 720);
 		frmDigitalerVorratsschrank.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmDigitalerVorratsschrank.getContentPane().setLayout(new BorderLayout(0, 0));
 		
-		JScrollPane scrollPane = new JScrollPane();
+		JScrollPane scrollPane = new JScrollPane(table);
+		table.setFillsViewportHeight(true);
 		scrollPane.setBorder(new TitledBorder("Vorrat"));
 		frmDigitalerVorratsschrank.getContentPane().add(scrollPane, BorderLayout.CENTER);
-		
-		JPanel panel_2 = new JPanel();
-		scrollPane.setViewportView(panel_2);
-		
-		JPanel panel_3 = new JPanel();
-		panel_2.add(panel_3);
 		
 		JPanel panel = new JPanel();
 		frmDigitalerVorratsschrank.getContentPane().add(panel, BorderLayout.EAST);
@@ -87,6 +91,40 @@ public class Darstellung {
 
 	}
 	
-	//TODO: Daten aus View darstellen!
+	public JTable initTabelle(ArrayList<Lagerbar> liste) {
+		String[] spaltennamen = {"Name", "Lagerort", "Preis", "Verfallsdatum", "Kategorie"};
+		Object[][] daten = new Object[liste.size()][spaltennamen.length];
+		
+		int idCount = 0;
+		
+		for(int row = 0; row < daten.length; row++) {
+			for(int col = 0; col < daten[row].length; col++) {
+				
+				switch(col) {
+				case 0:
+					daten[row][col] = liste.get(idCount).getName();
+					break;
+				case 1:
+					daten[row][col] = liste.get(idCount).getLagerort().getName();
+					break;
+				case 2:
+					daten[row][col] = liste.get(idCount).getPreis();
+					break;	
+				case 3:
+					daten[row][col] = liste.get(idCount).getMindesthaltbarkeit();
+					break;
+				case 4:
+					daten[row][col] = liste.get(idCount).getKategorie();
+					break;
+				default:
+					daten[row][col] = "-";
+				}
+			}
+			idCount++;
+		}
+		
+		this.lagerTableModel = new LagerTableModel(spaltennamen, daten);
+		return new JTable(lagerTableModel);
+	}
 	
 }

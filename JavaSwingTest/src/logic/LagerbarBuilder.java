@@ -14,6 +14,7 @@ import entities.Lagerbar;
 import entities.Lagerort;
 
 public class LagerbarBuilder {
+	private int id;
 	private String name;
 	private Lagerort lagerort;
 	private double preis;
@@ -24,6 +25,14 @@ public class LagerbarBuilder {
 	
 	public static LagerbarBuilder createBuilder() {
 		return new LagerbarBuilder();
+	}
+	
+	/**
+	 * Generiert eine inkrementelle ID für jedes neu erstellte Objekt
+	 */
+	public LagerbarBuilder setId(int id) {
+		this.id = Lagerbar.incrementId();
+		return this;
 	}
 	
 	public LagerbarBuilder setName(String name) {
@@ -66,7 +75,7 @@ public class LagerbarBuilder {
 	}
 	
 	public Lagerbar build() {
-		return new Lagerbar(name, lagerort, preis, mindesthaltbarkeit, kategorie);
+		return new Lagerbar(id, name, lagerort, preis, mindesthaltbarkeit, kategorie);
 	}
 	
 	/**
