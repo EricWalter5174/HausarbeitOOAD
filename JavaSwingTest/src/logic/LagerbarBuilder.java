@@ -74,6 +74,21 @@ public class LagerbarBuilder {
 		return this;
 	}
 	
+	/**
+	 * Überladung des Setters für Ordinale
+	 *  
+	 * @param kat
+	 * @return this
+	 */
+	public LagerbarBuilder setKategorie(int kat) {
+		if(kat < 0 || kat >= Kategorie.values().length) {
+			this.kategorie = Kategorie.UNDEFINED;
+			return this;
+		}
+		this.kategorie = Kategorie.values()[kat];
+		return this;
+	}
+	
 	public Lagerbar build() {
 		return new Lagerbar(id, name, lagerort, preis, mindesthaltbarkeit, kategorie);
 	}
@@ -81,7 +96,7 @@ public class LagerbarBuilder {
 	/**
 	 * Hilfsmethode, um String auf Integer zu prüfen
 	 */
-	public boolean isInt(String str) {
+	private boolean isInt(String str) {
 	  	try {
 	      	@SuppressWarnings("unused")			//Weil int x nur geprüft wird
 	    	int x = Integer.parseInt(str);

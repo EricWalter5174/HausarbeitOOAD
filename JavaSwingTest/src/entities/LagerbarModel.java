@@ -9,7 +9,10 @@ package entities;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import utility.LoadAndSaveHelper;
 
@@ -36,16 +39,35 @@ public class LagerbarModel {
 		return loader;
 	}
 	
-	//TODO: Lagerorte Duplikate filtern, evtl mit Set?
+	/**
+	 * Filtert mit HashSet Duplikate und befüllt dann
+	 * die Lagerort-Liste mit einzigartigen Einträgen
+	 */
 	private void initOrte() {
 		this.orte = new ArrayList<>();
+		Set<String> tmp= new HashSet<>();
 		
 		for(Lagerbar l : this.liste) {
-			orte.add(l.getLagerort());
+			tmp.add(l.getLagerort().getName());
 		}
-//		for(Lagerort o : orte) {
-//			System.out.println(o.getName());
-//		}
+		
+		for(String name : tmp) {
+			orte.add(new Lagerort(name));
+		}
+	}
+	
+	/**
+	 * Insert-Methode für Datensatz des Models. Hier prototypisch ohne richtige Datenbank/DAO.
+	 * @param lagerbar
+	 */
+	public void insert(Lagerbar lagerbar) {
+		this.liste.add(lagerbar);
+		
+		try {
+			loader.speichereDaten();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

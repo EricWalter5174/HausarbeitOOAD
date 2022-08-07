@@ -6,7 +6,6 @@
  */
 
 package logic;
-import ui.Darstellung;
 
 public class Applikation {
 
@@ -22,4 +21,8 @@ public class Applikation {
 		return instance;
 	}
 
+	public Verwaltung getVerwaltung() {
+		return this.verwaltung;
+	}
+	
 }
