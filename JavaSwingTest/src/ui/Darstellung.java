@@ -18,6 +18,8 @@ import java.awt.EventQueue;
 import java.awt.BorderLayout;
 
 import javax.swing.border.TitledBorder;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -25,16 +27,20 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 
-public class Darstellung {
+public class Darstellung implements TableModelListener {
 
 	private JFrame frmDigitalerVorratsschrank;
 	private LagerTableModel lagerTableModel;
 	private JTable lagerTable;
 	
+	private JScrollPane scrollPane;
+	
 	private LagerbarView lagerView = new LagerbarView();
 
 	public Darstellung(ArrayList<Lagerbar> liste) {
 		this.lagerTable = initTabelle(liste);
+		this.lagerTable.getModel().addTableModelListener(this);
+		
 		initDarstellung(this.lagerTable);
 		frmDigitalerVorratsschrank.setVisible(true);
 	}
@@ -46,7 +52,7 @@ public class Darstellung {
 		frmDigitalerVorratsschrank.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmDigitalerVorratsschrank.getContentPane().setLayout(new BorderLayout(0, 0));
 		
-		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane = new JScrollPane(table);
 		table.setFillsViewportHeight(true);
 		scrollPane.setBorder(new TitledBorder("Vorrat"));
 		frmDigitalerVorratsschrank.getContentPane().add(scrollPane, BorderLayout.CENTER);
@@ -129,6 +135,23 @@ public class Darstellung {
 		
 		this.lagerTableModel = new LagerTableModel(spaltennamen, daten);
 		return new JTable(lagerTableModel);
+	}
+
+	public void updateTabelle(JTable table) {
+		this.lagerTable = table;
+		this.lagerTableModel.fireTableDataChanged();
+		scrollPane.setViewportView(lagerTable);
+		lagerTable.setFillsViewportHeight(true);
+	}
+	
+	@Override
+	public void tableChanged(TableModelEvent e) {
+		int row = e.getFirstRow();
+        int column = e.getColumn();
+        TableModel model = (TableModel)e.getSource();
+        String columnName = model.getColumnName(column);
+        Object data = model.getValueAt(row, column);
+		
 	}
 	
 }
