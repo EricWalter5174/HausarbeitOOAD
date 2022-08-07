@@ -47,7 +47,7 @@ public class Darstellung implements TableModelListener {
 	private void initDarstellung(JTable table) {
 		frmDigitalerVorratsschrank = new JFrame();
 		frmDigitalerVorratsschrank.setTitle("Digitaler Vorratsschrank");
-		frmDigitalerVorratsschrank.setBounds(100, 100, 1280, 720);
+		frmDigitalerVorratsschrank.setBounds(100, 100, 800, 600);
 		frmDigitalerVorratsschrank.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmDigitalerVorratsschrank.getContentPane().setLayout(new BorderLayout(0, 0));
 				

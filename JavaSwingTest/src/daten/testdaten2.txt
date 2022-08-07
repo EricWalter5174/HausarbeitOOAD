@@ -1,7 +1,5 @@
- testname testort 1.23 20231230 0
- Apfel Kabuff 0.5 20231230 1
- öööööö Garage 16.0 00000101 0
- Joghurt Kirsche Kabuff 0.6 20230519 1
+ JoghurtKirsche Kühlschrank 0.6 20231230 1
+ Apfel Kühlschrank 0.5 20231230 1
+ Fahrradreifen Garage 16.0 00000101 5
  Toilettenpapier Kabuff 2.89 00000101 4
- FFFFFF testort 0.0 00000101 1
- gggggggggggg Garage 0.0 00000101 0
+ Mein kleiner Benis Kühlschrank 0.0 00000101 5
