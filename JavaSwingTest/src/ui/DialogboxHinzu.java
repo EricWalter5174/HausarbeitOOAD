@@ -66,6 +66,7 @@ public class DialogboxHinzu extends JDialog {
 			nameTextField = new JTextField();
 			contentPanel.add(nameTextField);
 			nameTextField.setColumns(10);
+			nameTextField.setToolTipText("Name");
 		}
 		{
 			JLabel lblNewLabel_1 = new JLabel("Lagerort");
@@ -84,6 +85,7 @@ public class DialogboxHinzu extends JDialog {
 			preisTextField = new JTextField();
 			contentPanel.add(preisTextField);
 			preisTextField.setColumns(10);
+			preisTextField.setToolTipText("Preis");
 		}
 		{
 			JLabel lblNewLabel_3 = new JLabel("Verfallsdatum");
@@ -93,6 +95,7 @@ public class DialogboxHinzu extends JDialog {
 			verfallTextField = new JTextField();
 			contentPanel.add(verfallTextField);
 			verfallTextField.setColumns(10);
+			verfallTextField.setToolTipText("Verfallsdatum");
 		}
 		{
 			JLabel lblNewLabel_4 = new JLabel("Kategorie");

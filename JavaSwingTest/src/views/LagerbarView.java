@@ -91,8 +91,8 @@ public class LagerbarView {
 	 * @param liste
 	 */
 	public void updateView(ArrayList<Lagerbar> liste) {
-		//this.darstellung.initTabelle(liste);
-		this.darstellung = new Darstellung(liste);
+		this.darstellung.updateTabelle(darstellung.initTabelle(liste));
+		//this.darstellung = new Darstellung(liste);
 		//TODO: Bestehende Darstellung ändern oder komplett neu starten und alte verwerfen
 	}
 	
