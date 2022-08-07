@@ -4,14 +4,10 @@
  * @author Giuseppe Buccellato, Eric Walter
  */
 
-package logic;
+package entities;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
-import entities.Kategorie;
-import entities.Lagerbar;
-import entities.Lagerort;
 
 public class LagerbarBuilder {
 	private int id;

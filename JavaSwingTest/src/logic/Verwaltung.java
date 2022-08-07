@@ -7,8 +7,6 @@
  */
 
 package logic;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 
 import entities.Lagerbar;
@@ -17,14 +15,11 @@ import views.LagerbarView;
 
 public class Verwaltung {
 	private LagerbarView lagerView;
-	private LagerbarBuilder lagerbarBuilder; //zum Erstellen neuer Objekte durch den User
 	private LagerbarModel lagerbarModel;
 	
 	public Verwaltung() {
 		initModel();
-		initView();
-		this.lagerbarBuilder = new LagerbarBuilder();
-		
+		initView();		
 	}
 	
 	/**
@@ -48,10 +43,17 @@ public class Verwaltung {
 	}
 	
 	/**
-	 * Die Verwaltung gibt dem View den Befehl, die Dialogbox zu öffnen
+	 * Die Verwaltung gibt dem View den Befehl, die Dialogboxen zu öffnen
 	 */
 	public void hinzuButtonClick() {
 		lagerView.hinzuDialogOeffnen();
+	}
+	
+	public void aendernButtonClick(int id) {
+		Lagerbar lb = getLagerbarById(id);
+		if(lb != null) {
+			lagerView.aendernDialogOeffnen(lb, lagerbarModel.getOrte());
+		}
 	}
 	
 	/**
@@ -62,6 +64,15 @@ public class Verwaltung {
 	public void registriereNeuesLagerbar(Lagerbar lagerbar) {
 		lagerbarModel.insert(lagerbar);
 		lagerView.updateView(lagerbarModel.getListe());
+	}
+
+	private Lagerbar getLagerbarById(int id) {
+		for(Lagerbar l : lagerbarModel.getListe()) {
+			if(l.getId() == id) {
+				return l;
+			}
+		}
+		return null;
 	}
 	
 }

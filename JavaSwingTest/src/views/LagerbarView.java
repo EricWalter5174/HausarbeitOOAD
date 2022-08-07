@@ -7,14 +7,12 @@
 package views;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 import javax.swing.JDialog;
 
 import entities.Lagerbar;
 import entities.Lagerort;
 import logic.Applikation;
-import logic.Verwaltung;
 import ui.Darstellung;
 import ui.DialogboxAendern;
 import ui.DialogboxEntfernen;
@@ -26,8 +24,6 @@ public class LagerbarView {
 	private JDialog dialogboxHinzu;
 	private JDialog dialogboxAendern;
 	private JDialog dialogboxEntfernen;
-	
-	//private Verwaltung verwaltung = new Verwaltung();
 	
 	private ArrayList<Lagerbar> liste;
 	private ArrayList<Lagerort> orte;
@@ -58,7 +54,7 @@ public class LagerbarView {
 	
 	/**
 	 * Das LagerbarView benachrichtigt die Verwaltung über die
-	 * Nutzerinteraktion.
+	 * Nutzerinteraktionen. UI-Logik findet hier statt.
 	 * Die bestehende Verwaltung der statischen App-Instanz wird genutzt, 
 	 * um ein zusätzliches Verwaltungsobjekt zu vermeiden.
 	 */
@@ -66,14 +62,28 @@ public class LagerbarView {
 		Applikation.getInstance().getVerwaltung().hinzuButtonClick();
 	}
 	
+	public void aendernButtonClick(int id) {
+		Applikation.getInstance().getVerwaltung().aendernButtonClick(id);
+	}
+
+	public void entfernenButtonClick() {
+		//Applikation.getInstance().getVerwaltung().entfernenButtonClick();		
+	}
+	
 	/**
-	 * Öffnet die von der Verwaltung angeordnete Dialogbox zum Hinzufügen
-	 * eines neuen Eintrags.
+	 * Öffnet die von der Verwaltung angeordneten Dialogboxen 
+	 * zum Hinzufügen, Bearbeiten oder Entfernen von Einträgen.
 	 */
 	public void hinzuDialogOeffnen() {
 		this.dialogboxHinzu = new DialogboxHinzu("Eintrag hinzufügen", true, orte);
 		this.dialogboxHinzu.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		this.dialogboxHinzu.setVisible(true);
+	}
+	
+	public void aendernDialogOeffnen(Lagerbar lagerbar, ArrayList<Lagerort> orte) {
+		this.dialogboxAendern = new DialogboxAendern("Eintrag " + lagerbar.getName() + " bearbeiten", true, orte, lagerbar);
+		this.dialogboxAendern.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		this.dialogboxAendern.setVisible(true);
 	}
 	
 	/**
@@ -91,9 +101,8 @@ public class LagerbarView {
 	 * @param liste
 	 */
 	public void updateView(ArrayList<Lagerbar> liste) {
+		this.liste = liste;
 		this.darstellung.updateTabelle(darstellung.initTabelle(liste));
-		//this.darstellung = new Darstellung(liste);
-		//TODO: Bestehende Darstellung ändern oder komplett neu starten und alte verwerfen
 	}
 	
 }

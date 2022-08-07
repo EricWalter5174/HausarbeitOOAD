@@ -31,6 +31,7 @@ public class Darstellung implements TableModelListener {
 	private LagerTableModel lagerTableModel;
 	private JTable lagerTable;
 	
+	private JPanel panel, panel_1;
 	private JScrollPane scrollPane;
 	
 	private LagerbarView lagerView = new LagerbarView();
@@ -49,19 +50,19 @@ public class Darstellung implements TableModelListener {
 		frmDigitalerVorratsschrank.setBounds(100, 100, 1280, 720);
 		frmDigitalerVorratsschrank.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmDigitalerVorratsschrank.getContentPane().setLayout(new BorderLayout(0, 0));
+				
+		panel = new JPanel();
+		frmDigitalerVorratsschrank.getContentPane().add(panel, BorderLayout.EAST);
+		panel.setLayout(new BorderLayout(0, 0));
+		
+		panel_1 = new JPanel();
+		panel.add(panel_1, BorderLayout.SOUTH);
+		panel_1.setLayout(new GridLayout(3, 1, 0, 0));
 		
 		scrollPane = new JScrollPane(table);
 		table.setFillsViewportHeight(true);
 		scrollPane.setBorder(new TitledBorder("Vorrat"));
 		frmDigitalerVorratsschrank.getContentPane().add(scrollPane, BorderLayout.CENTER);
-		
-		JPanel panel = new JPanel();
-		frmDigitalerVorratsschrank.getContentPane().add(panel, BorderLayout.EAST);
-		panel.setLayout(new BorderLayout(0, 0));
-		
-		JPanel panel_1 = new JPanel();
-		panel.add(panel_1, BorderLayout.SOUTH);
-		panel_1.setLayout(new GridLayout(3, 1, 0, 0));
 		
 		/**
 		 * Der Hinzufügen-Button benachrichtigt das LagerbarView 
@@ -80,9 +81,12 @@ public class Darstellung implements TableModelListener {
 		btnAendern.addActionListener(new ActionListener() {	
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JDialog dialog = new DialogboxAendern("Eintrag ändern", true);
-				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-				dialog.setVisible(true);		
+				int selected = lagerTable.getSelectedRow();
+				if(lagerTable.getSelectedRowCount() != 1) {
+					JOptionPane.showMessageDialog(frmDigitalerVorratsschrank, "Es muss/darf nur eine Zeile zum Bearbeiten gewählt werden.");
+				}else {
+					lagerView.aendernButtonClick(getIdColumn(selected));		
+				}
 			}
 		});
 		
@@ -91,16 +95,13 @@ public class Darstellung implements TableModelListener {
 		btnEntfernen.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JDialog dialog = new DialogboxEntfernen("Eintrag entfernen", true);
-				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-				dialog.setVisible(true);
+				lagerView.entfernenButtonClick();
 			}
 		});
-
 	}
 	
 	public JTable initTabelle(ArrayList<Lagerbar> liste) {
-		String[] spaltennamen = {"Name", "Lagerort", "Preis", "Verfallsdatum", "Kategorie"};
+		String[] spaltennamen = {"ID", "Name", "Lagerort", "Preis", "Verfallsdatum", "Kategorie"};
 		Object[][] daten = new Object[liste.size()][spaltennamen.length];
 		
 		int idCount = 0;
@@ -110,18 +111,21 @@ public class Darstellung implements TableModelListener {
 				
 				switch(col) {
 				case 0:
-					daten[row][col] = liste.get(idCount).getName();
+					daten[row][col] = liste.get(idCount).getId();
 					break;
 				case 1:
-					daten[row][col] = liste.get(idCount).getLagerort().getName();
+					daten[row][col] = liste.get(idCount).getName();
 					break;
 				case 2:
+					daten[row][col] = liste.get(idCount).getLagerort().getName();
+					break;
+				case 3:
 					daten[row][col] = liste.get(idCount).getPreis();
 					break;	
-				case 3:
+				case 4:
 					daten[row][col] = liste.get(idCount).getMindesthaltbarkeit();
 					break;
-				case 4:
+				case 5:
 					daten[row][col] = liste.get(idCount).getKategorie();
 					break;
 				default:
@@ -136,9 +140,10 @@ public class Darstellung implements TableModelListener {
 	}
 
 	public void updateTabelle(JTable table) {
+		scrollPane.remove(lagerTable);
 		this.lagerTable = table;
 		this.lagerTableModel.fireTableDataChanged();
-		scrollPane.setViewportView(lagerTable);
+		scrollPane.setViewportView(lagerTable); //IST IM VORDERGRUND, ABER NICHT AKTIV
 		lagerTable.setFillsViewportHeight(true);
 	}
 	
@@ -152,4 +157,7 @@ public class Darstellung implements TableModelListener {
 		
 	}
 	
+	private int getIdColumn(int selected) {
+		return (int) lagerTableModel.getValueAt(selected, 0);
+	}
 }

@@ -33,8 +33,8 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import entities.Kategorie;
 import entities.Lagerbar;
+import entities.LagerbarBuilder;
 import entities.Lagerort;
-import logic.LagerbarBuilder;
 
 public class DialogboxHinzu extends JDialog {
 

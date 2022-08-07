@@ -15,7 +15,7 @@ import java.util.Locale;
 import java.util.Scanner;
 
 import entities.Lagerbar;
-import logic.LagerbarBuilder;
+import entities.LagerbarBuilder;
 
 public class LoadAndSaveHelper {
 	private Scanner scanner;
