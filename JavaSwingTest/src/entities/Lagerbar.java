@@ -57,8 +57,11 @@ public class Lagerbar {
 
 	@Override
 	public String toString() {
-		return name + " " + lagerort.getName() + " " + preis  + " " + mindesthaltbarkeit + " " + kategorie;
+		return name + " " + lagerort.getName() + " " + preis  + " " + formatDateString(mindesthaltbarkeit.toString()) + " " + kategorie.ordinal();
 	}
 	
+	private String formatDateString(String str) {
+		return str.replace("-", "");
+	}
 	
 }

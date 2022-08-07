@@ -11,10 +11,8 @@ import javax.swing.table.TableModel;
 
 import entities.LagerTableModel;
 import entities.Lagerbar;
-import entities.Lagerort;
 import views.LagerbarView;
 
-import java.awt.EventQueue;
 import java.awt.BorderLayout;
 
 import javax.swing.border.TitledBorder;

@@ -41,15 +41,15 @@ public class LoadAndSaveHelper {
 		return liste;
 	}
 	
-	/*
-	 * TODO: Die Speichermethode wird Probleme machen, da z.B. das MHD nicht im gleichen Format geschrieben wie es gelesen wird.
-	 * Die Kategorie wird als Wort ausgeschrieben, während sie als Integer eingelesen wird.
-	 * Außerdem speichert sie nicht zeilenweise sondern alles in einer langen Zeile.
+	/**
+	 * Einfache Speichermethode, die die aktuelle Liste der Einträge in einer
+	 * Textdatei sichert. Die Formatierung ist identisch mit der der Inputdatei.
+	 * @throws IOException
 	 */
 	public void speichereDaten() throws IOException {
 		FileWriter fw = new FileWriter(new File("src/daten/testdaten2.txt"));
 		for(Lagerbar l : liste) {
-			fw.write(l.toString());
+			fw.write(" " + l.toString() + "\n");
 		}
 		fw.close();
 	}

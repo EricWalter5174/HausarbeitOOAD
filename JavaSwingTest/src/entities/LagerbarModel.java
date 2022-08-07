@@ -57,7 +57,8 @@ public class LagerbarModel {
 	}
 	
 	/**
-	 * Insert-Methode für Datensatz des Models. Hier prototypisch ohne richtige Datenbank/DAO.
+	 * Insert-Methode für Datensatz des Models. Hier prototypisch ohne richtige Datenbank/DAO,
+	 * aber mit simpler Speichermethode für Textdateien.
 	 * @param lagerbar
 	 */
 	public void insert(Lagerbar lagerbar) {

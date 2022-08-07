@@ -1,1 +1,5 @@
-testname testort 1.23 2023-12-30 UNDEFINEDApfel Kabuff 0.5 2023-12-30 LEBENSMITTELFahrradreifen Garage 16.0 0000-01-01 SONSTIGEUngültigeKategorieTest testort 1.0 0000-01-01 UNDEFINEDggg Garage 0.0 0000-01-01 UNDEFINEDeeeeeeeee Garage 0.0 0000-01-01 UNDEFINEDrrr testort 0.0 0000-01-01 LEBENSMITTEL
+ testname testort 1.23 20231230 0
+ Apfel Kabuff 0.5 20231230 1
+ Fahrradreifen Garage 16.0 00000101 5
+ UngültigeKategorieTest testort 1.0 00000101 0
+ FFFF Garage 0.0 00000101 0
