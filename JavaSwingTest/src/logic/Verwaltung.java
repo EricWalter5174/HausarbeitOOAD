@@ -7,8 +7,11 @@
  */
 
 package logic;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 
+import entities.Lagerbar;
 import entities.LagerbarModel;
 import views.LagerbarView;
 
@@ -38,11 +41,27 @@ public class Verwaltung {
 	}
 	
 	/**
-	 * Initialisiert View mit Daten des Models
+	 * Initialisiert View mit Testdaten des Models
 	 */
 	private void initView() {
 		this.lagerView = new LagerbarView(lagerbarModel.getListe(), lagerbarModel.getOrte());
 	}
 	
-	//TODO: update View
+	/**
+	 * Die Verwaltung gibt dem View den Befehl, die Dialogbox zu öffnen
+	 */
+	public void hinzuButtonClick() {
+		lagerView.hinzuDialogOeffnen();
+	}
+	
+	/**
+	 * Vermittelt neu erstelltes Lagerbar-Objekt an LagerbarModel
+	 * und aktualisiert Datensatz für View.
+	 * @param lagerbar
+	 */
+	public void registriereNeuesLagerbar(Lagerbar lagerbar) {
+		lagerbarModel.insert(lagerbar);
+		lagerView.updateView(lagerbarModel.getListe());
+	}
+	
 }

@@ -42,8 +42,9 @@ public class LoadAndSaveHelper {
 	}
 	
 	/*
-	 * Die Speichermethode wird Probleme machen, da z.B. das MHD nicht im gleichen Format geschrieben wie es gelesen wird.
+	 * TODO: Die Speichermethode wird Probleme machen, da z.B. das MHD nicht im gleichen Format geschrieben wie es gelesen wird.
 	 * Die Kategorie wird als Wort ausgeschrieben, während sie als Integer eingelesen wird.
+	 * Außerdem speichert sie nicht zeilenweise sondern alles in einer langen Zeile.
 	 */
 	public void speichereDaten() throws IOException {
 		FileWriter fw = new FileWriter(new File("src/daten/testdaten2.txt"));

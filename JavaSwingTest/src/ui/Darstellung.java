@@ -12,6 +12,7 @@ import javax.swing.table.TableModel;
 import entities.LagerTableModel;
 import entities.Lagerbar;
 import entities.Lagerort;
+import views.LagerbarView;
 
 import java.awt.EventQueue;
 import java.awt.BorderLayout;
@@ -29,6 +30,8 @@ public class Darstellung {
 	private JFrame frmDigitalerVorratsschrank;
 	private LagerTableModel lagerTableModel;
 	private JTable lagerTable;
+	
+	private LagerbarView lagerView = new LagerbarView();
 
 	public Darstellung(ArrayList<Lagerbar> liste) {
 		this.lagerTable = initTabelle(liste);
@@ -56,14 +59,15 @@ public class Darstellung {
 		panel.add(panel_1, BorderLayout.SOUTH);
 		panel_1.setLayout(new GridLayout(3, 1, 0, 0));
 		
+		/**
+		 * Der Hinzufügen-Button benachrichtigt das LagerbarView 
+		 */
 		JButton btnHinzu = new JButton("Hinzufügen");
 		panel_1.add(btnHinzu);
 		btnHinzu.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JDialog dialog = new DialogboxHinzu("Eintrag hinzufügen", true);
-				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-				dialog.setVisible(true);
+				lagerView.hinzuButtonClick();
 			}
 		});
 

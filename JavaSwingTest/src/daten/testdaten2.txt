@@ -1,0 +1,1 @@
+testname testort 1.23 2023-12-30 UNDEFINEDApfel Kabuff 0.5 2023-12-30 LEBENSMITTELFahrradreifen Garage 16.0 0000-01-01 SONSTIGEUngültigeKategorieTest testort 1.0 0000-01-01 UNDEFINEDjj Garage 0.0 0000-01-01 UNDEFINED
