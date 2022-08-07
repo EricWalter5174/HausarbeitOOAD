@@ -65,6 +65,15 @@ public class Verwaltung {
 		lagerbarModel.insert(lagerbar);
 		lagerView.updateView(lagerbarModel.getListe());
 	}
+	
+	public void registriereAenderung(Lagerbar lagerbar) {
+		for(Lagerbar l : lagerbarModel.getListe()) {
+			if(l.getId() == lagerbar.getId()) {
+				lagerbarModel.update(l.getId(), lagerbar);
+			}
+		}
+		lagerView.updateView(lagerbarModel.getListe());
+	}
 
 	private Lagerbar getLagerbarById(int id) {
 		for(Lagerbar l : lagerbarModel.getListe()) {

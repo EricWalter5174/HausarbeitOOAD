@@ -23,9 +23,6 @@ import javax.swing.JOptionPane;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import javax.swing.JTextField;
@@ -118,7 +115,6 @@ public class DialogboxHinzu extends JDialog {
 				okButton.addActionListener(new ActionListener() {	
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						
 						//Eingaben einlesen und verarbeiten
 						if(eingabenVerarbeiten(nameTextField.getText(),
 												comboBoxLagerort.getSelectedItem(),
@@ -174,14 +170,14 @@ public class DialogboxHinzu extends JDialog {
 		
 		if(preis == null || preis.isEmpty()) {
 			preis = "0.00";	
-		}else if(!isDouble(preis)) {
+		}else if(!LagerbarBuilder.isDouble(preis)) {
 			JOptionPane.showMessageDialog(this, "Preis bitte im Format '0.00' oder das Feld leer lassen.");
 			return false;
 		}
 		
 		if(verfallsdatum == null || verfallsdatum.isEmpty()) {
 			verfallsdatum = "00000101";
-		}else if(!isDate(verfallsdatum)) {
+		}else if(!LagerbarBuilder.isDate(verfallsdatum)) {
 			JOptionPane.showMessageDialog(this, "Datum bitte im Format 'YYYYMMDD' oder das Feld leer lassen.");
 			return false;
 		}
@@ -204,28 +200,28 @@ public class DialogboxHinzu extends JDialog {
 	}
 	
 	
-	/**
-	 * Hilfsmethoden, um Strings auf verschiedene Datentypen zu prüfen
-	 */
-	private boolean isDouble(String str) {
-	  	try {
-	      	@SuppressWarnings("unused")			//Weil double x nur geprüft wird
-	    	double x = Double.parseDouble(str);
-	      	return true; 						//String enthält Double
-		} catch (NumberFormatException e) {
-	    	return false; 						//String enthält keinen Double
-		}
-	  	
-	}
-	
-	private boolean isDate(String s) {
-		try {
-			@SuppressWarnings("unused")	
-			LocalDate d = LocalDate.parse(s, DateTimeFormatter.BASIC_ISO_DATE);
-			return true;
-		} catch(DateTimeParseException e) {
-			return false;
-		}
-	}
+//	/**
+//	 * Hilfsmethoden, um Strings auf verschiedene Datentypen zu prüfen
+//	 */
+//	private boolean isDouble(String str) {
+//	  	try {
+//	      	@SuppressWarnings("unused")			//Weil double x nur geprüft wird
+//	    	double x = Double.parseDouble(str);
+//	      	return true; 						//String enthält Double
+//		} catch (NumberFormatException e) {
+//	    	return false; 						//String enthält keinen Double
+//		}
+//	  	
+//	}
+//	
+//	private boolean isDate(String s) {
+//		try {
+//			@SuppressWarnings("unused")	
+//			LocalDate d = LocalDate.parse(s, DateTimeFormatter.BASIC_ISO_DATE);
+//			return true;
+//		} catch(DateTimeParseException e) {
+//			return false;
+//		}
+//	}
 
 }

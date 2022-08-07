@@ -95,6 +95,10 @@ public class LagerbarView {
 		Applikation.getInstance().getVerwaltung().registriereNeuesLagerbar(lagerbar);
 	}
 	
+	public void registriereAenderungAnEintrag(Lagerbar lagerbar) {
+		Applikation.getInstance().getVerwaltung().registriereAenderung(lagerbar);
+	}
+	
 	/**
 	 * Bekommt einen aktualisierten Datensatz von der Verwaltung und reicht diesen
 	 * zum Hauptdarstellungsfenster weiter.

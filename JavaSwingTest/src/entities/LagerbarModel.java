@@ -71,4 +71,23 @@ public class LagerbarModel {
 		}
 	}
 	
+	/**
+	 * Aktualisiert einen gewählten Eintrag in der Liste mit einem neuen Objekt.
+	 * Die mitgelieferte ID muss in set() um 1 verringert werden,
+	 * da set() einen Index für die Liste verlangt 
+	 * und die generierten IDs in der Tabelle bei 1 beginnen.
+	 * 
+	 * @param id
+	 * @param lagerbar
+	 */
+	public void update(int id, Lagerbar lagerbar) {
+		this.liste.set(id - 1, lagerbar);
+		
+		try {
+			loader.speichereDaten();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }
