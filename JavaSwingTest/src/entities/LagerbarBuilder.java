@@ -4,14 +4,11 @@
  * @author Giuseppe Buccellato, Eric Walter
  */
 
-package logic;
+package entities;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
-import entities.Kategorie;
-import entities.Lagerbar;
-import entities.Lagerort;
+import java.time.format.DateTimeParseException;
 
 public class LagerbarBuilder {
 	private int id;
@@ -32,6 +29,15 @@ public class LagerbarBuilder {
 	 */
 	public LagerbarBuilder setId(int id) {
 		this.id = Lagerbar.incrementId();
+		return this;
+	}
+	
+	/**
+	 * Behält die ID eines zu ändernden Eintrags 
+	 * bei ohne zu inkrementieren
+	 */
+	public LagerbarBuilder preserveId(int id) {
+		this.id = id;
 		return this;
 	}
 	
@@ -94,15 +100,36 @@ public class LagerbarBuilder {
 	}
 	
 	/**
-	 * Hilfsmethode, um String auf Integer zu prüfen
+	 * Hilfsmethoden, um Strings auf verschiedene Datentypen zu prüfen
 	 */
-	private boolean isInt(String str) {
+	public static boolean isDouble(String str) {
 	  	try {
-	      	@SuppressWarnings("unused")			//Weil int x nur geprüft wird
-	    	int x = Integer.parseInt(str);
-	      	return true; 						//String enthält Integer
+	      	@SuppressWarnings("unused")			//Weil double x nur geprüft wird
+	    	double x = Double.parseDouble(str);
+	      	return true; 						//String enthält Double
 		} catch (NumberFormatException e) {
-	    	return false; 						//String enthält keinen Integer
+	    	return false; 						//String enthält keinen Double
+		}
+	  	
+	}
+	
+	public static boolean isDate(String s) {
+		try {
+			@SuppressWarnings("unused")	
+			LocalDate d = LocalDate.parse(s, DateTimeFormatter.BASIC_ISO_DATE);
+			return true;
+		} catch(DateTimeParseException e) {
+			return false;
+		}
+	}
+	
+	public static boolean isInt(String str) {
+	  	try {
+	      	@SuppressWarnings("unused")
+	    	int x = Integer.parseInt(str);
+	      	return true;
+		} catch (NumberFormatException e) {
+	    	return false; 
 		}
 	  	
 	}

@@ -57,8 +57,16 @@ public class Lagerbar {
 
 	@Override
 	public String toString() {
-		return name + " " + lagerort.getName() + " " + preis  + " " + mindesthaltbarkeit + " " + kategorie;
+		return name + " " + lagerort.getName() + " " + preis  + " " + formatDateString(mindesthaltbarkeit.toString()) + " " + kategorie.ordinal();
 	}
 	
+	/**
+	 * Generiert einen Datum-String ohne Bindestriche
+	 * @param str
+	 * @return 
+	 */
+	public static String formatDateString(String str) {
+		return str.replace("-", "");
+	}
 	
 }
