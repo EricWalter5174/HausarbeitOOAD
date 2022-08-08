@@ -1,8 +1,8 @@
 /**
  * Klasse für die Instanziierung der Applikation als Singleton.
- * Die Darstellung sowie die Verwaltung werden hier erzeugt.
+ * Die Verwaltungsinstanz wird hier erzeugt.
  * 
- * @author Eric Walter
+ * @author Giuseppe Buccellato, Eric Walter
  */
 
 package logic;

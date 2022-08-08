@@ -1,5 +1,5 @@
 /**
- * Darstellungsklasse für die Verwaltung der UI-Elemente und Dialogboxen
+ * Darstellungsklasse für die Verwaltung der UI-Elemente und Dialogboxen.
  * 
  * @author Giuseppe Buccellato, Eric Walter
  */
@@ -44,10 +44,18 @@ public class Darstellung implements TableModelListener {
 		frmDigitalerVorratsschrank.setVisible(true);
 	}
 
+	/**
+	 * Initialisiert die Darstellung mit dem Frame, den Panels 
+	 * und den darin angezeigten Komponenten und Buttons.
+	 * Durch ActionListener werden Nutzerinteraktionen interpretiert.
+	 * 
+	 * @param table
+	 */
 	private void initDarstellung(JTable table) {
 		frmDigitalerVorratsschrank = new JFrame();
 		frmDigitalerVorratsschrank.setTitle("Digitaler Vorratsschrank");
-		frmDigitalerVorratsschrank.setBounds(100, 100, 800, 600);
+		frmDigitalerVorratsschrank.setBounds(0, 0, 800, 600);
+		frmDigitalerVorratsschrank.setLocationRelativeTo(null);
 		frmDigitalerVorratsschrank.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmDigitalerVorratsschrank.getContentPane().setLayout(new BorderLayout(0, 0));
 				
@@ -64,9 +72,6 @@ public class Darstellung implements TableModelListener {
 		scrollPane.setBorder(new TitledBorder("Vorrat"));
 		frmDigitalerVorratsschrank.getContentPane().add(scrollPane, BorderLayout.CENTER);
 		
-		/**
-		 * Der Hinzufügen-Button benachrichtigt das LagerbarView 
-		 */
 		JButton btnHinzu = new JButton("Hinzufügen");
 		panel_1.add(btnHinzu);
 		btnHinzu.addActionListener(new ActionListener() {
@@ -83,7 +88,8 @@ public class Darstellung implements TableModelListener {
 			public void actionPerformed(ActionEvent e) {
 				int selected = lagerTable.getSelectedRow();
 				if(lagerTable.getSelectedRowCount() != 1) {
-					JOptionPane.showMessageDialog(frmDigitalerVorratsschrank, "Es muss/darf nur eine Zeile zum Bearbeiten gewählt werden.");
+					JOptionPane.showMessageDialog(frmDigitalerVorratsschrank, 
+							"Es kann nur eine Zeile zum Bearbeiten gewählt werden.");
 				}else {
 					lagerView.aendernButtonClick(getIdColumn(selected));		
 				}
@@ -95,11 +101,27 @@ public class Darstellung implements TableModelListener {
 		btnEntfernen.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				lagerView.entfernenButtonClick();
+				int selected = lagerTable.getSelectedRow();
+				if(lagerTable.getSelectedRowCount() != 1) {
+					JOptionPane.showMessageDialog(frmDigitalerVorratsschrank, 
+							"Es kann nur eine Zeile zum Entfernen gewählt werden.");
+				}else {
+					lagerView.entfernenButtonClick(getIdColumn(selected));		
+				}
 			}
 		});
 	}
 	
+	/**
+	 * Befüllt ein 1D-Array mit Strings der Spaltennamen
+	 * und ein 2D-Array mit der Datenmatrix der aus der "Datenbank"
+	 * eingelesen Lagerbarobjekte.
+	 * Erstellt und initialisiert ein TableModel mit den erfassten Daten.
+	 * Gibt eine JTable mit dem TableModel als Basis zurück.
+	 * 
+	 * @param liste
+	 * @return Eine neue JTable, die zur Darstellung genutzt wird
+	 */
 	public JTable initTabelle(ArrayList<Lagerbar> liste) {
 		String[] spaltennamen = {"ID", "Name", "Lagerort", "Preis", "Verfallsdatum", "Kategorie"};
 		Object[][] daten = new Object[liste.size()][spaltennamen.length];
@@ -139,11 +161,17 @@ public class Darstellung implements TableModelListener {
 		return new JTable(lagerTableModel);
 	}
 
+	/**
+	 * Aktualisiert die angezeigte Tabelle im Hauptfenster nachdem
+	 * Änderungen durchgeführt wurden.
+	 * 
+	 * @param table			
+	 */
 	public void updateTabelle(JTable table) {
 		scrollPane.remove(lagerTable);
 		this.lagerTable = table;
 		this.lagerTableModel.fireTableDataChanged();
-		scrollPane.setViewportView(lagerTable); //IST IM VORDERGRUND, ABER NICHT AKTIV
+		scrollPane.setViewportView(lagerTable);
 		lagerTable.setFillsViewportHeight(true);
 	}
 	
@@ -152,11 +180,18 @@ public class Darstellung implements TableModelListener {
 		int row = e.getFirstRow();
         int column = e.getColumn();
         TableModel model = (TableModel)e.getSource();
+        @SuppressWarnings("unused")
         String columnName = model.getColumnName(column);
+        @SuppressWarnings("unused")
         Object data = model.getValueAt(row, column);
-		
 	}
 	
+	/**
+	 * Ermittelt die ID des ausgewählten Eintrags 
+	 * durch das Auslesen der Spalte ID an der übergebenen Zeile.
+	 * 
+	 * @param selected 				Index der ausgewählten Zeile 
+	 */
 	private int getIdColumn(int selected) {
 		return (int) lagerTableModel.getValueAt(selected, 0);
 	}

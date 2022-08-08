@@ -48,7 +48,7 @@ public class DialogboxAendern extends JDialog {
 	public DialogboxAendern(String title, boolean modal, ArrayList<Lagerort> orte, Lagerbar lagerbar) {
 		setTitle(title);
 		setModal(modal);
-		setBounds(100, 100, 450, 300);
+		setBounds(0, 0, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -165,7 +165,8 @@ public class DialogboxAendern extends JDialog {
 	private boolean aenderungenVerarbeiten(int id, String name, Object ort, String preis, String verfallsdatum, int kat) {
 			
 		if(name == null || name.isEmpty()) {
-			JOptionPane.showMessageDialog(this, "Name darf nicht leer sein.");
+			JOptionPane.showMessageDialog(this, 
+					"Name darf nicht leer sein.");
 			return false;
 		}
 		
@@ -176,14 +177,16 @@ public class DialogboxAendern extends JDialog {
 		if(preis == null || preis.isEmpty()) {
 			preis = "0.00";	
 		}else if(!LagerbarBuilder.isDouble(preis)) {
-			JOptionPane.showMessageDialog(this, "Preis bitte im Format '0.00' oder das Feld leer lassen.");
+			JOptionPane.showMessageDialog(this, 
+					"Preis bitte im Format '0.00' oder das Feld leer lassen.");
 			return false;
 		}
 		
 		if(verfallsdatum == null || verfallsdatum.isEmpty()) {
 			verfallsdatum = "00000101";
 		}else if(!LagerbarBuilder.isDate(verfallsdatum)) {
-			JOptionPane.showMessageDialog(this, "Datum bitte im Format 'YYYYMMDD' oder das Feld leer lassen.");
+			JOptionPane.showMessageDialog(this, 
+					"Datum bitte im Format 'YYYYMMDD' oder das Feld leer lassen.");
 			return false;
 		}
 		
@@ -198,7 +201,7 @@ public class DialogboxAendern extends JDialog {
 								.setLagerort(((Lagerort) ort).getName())
 								.setPreis(Double.parseDouble(preis))
 								.setMindesthaltbarkeit(verfallsdatum)
-								.setKategorie(kat) //String.valueOf(kat))
+								.setKategorie(kat)
 								.build();
 		
 		return true;

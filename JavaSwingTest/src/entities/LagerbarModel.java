@@ -1,6 +1,12 @@
 /**
  * Datenmodel für Lagerbar-Objekte, die aus Testdaten initialisiert
  * und von der Verwaltung abgerufen werden.
+ * Änderungen seitens der NutzerInnen werden vom View 
+ * über die Verwaltung geleitet und hier konkret bearbeitet.
+ * 
+ * Das LagerbarModel hält sowohl eine Liste aller Lagerbar-Objekte
+ * als auch eine Liste von dynamisch erzeugten Lagerorten, die 
+ * in späteren Implementationen von Nutzenden individuell hinzugefügt werden sollen.
  * 
  * @author Giuseppe Buccellato, Eric Walter
  */
@@ -57,8 +63,8 @@ public class LagerbarModel {
 	}
 	
 	/**
-	 * Insert-Methode für Datensatz des Models. Hier prototypisch ohne richtige Datenbank/DAO,
-	 * aber mit simpler Speichermethode für Textdateien.
+	 * Insert-Methode für Datensatz des Models. Hier prototypisch ohne "richtige" Datenbank
+	 * oder DAO-Interface, aber mit simpler Speichermethode für die Outputdatei.
 	 * @param lagerbar
 	 */
 	public void insert(Lagerbar lagerbar) {
@@ -83,6 +89,26 @@ public class LagerbarModel {
 	public void update(int id, Lagerbar lagerbar) {
 		this.liste.set(id - 1, lagerbar);
 		
+		try {
+			loader.speichereDaten();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 
+	 * @param id
+	 */
+	public void remove(int id) {
+		this.liste.remove(id - 1);
+		Lagerbar.setCount(this.liste.size());
+		
+		for(int i = id - 1; i < this.liste.size(); i++) {
+			this.liste.get(i).setId(id);
+			id++;
+		}
+
 		try {
 			loader.speichereDaten();
 		} catch (IOException e) {

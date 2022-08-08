@@ -1,5 +1,5 @@
 /**
- * Helferklasse zum Laden und Speichern von Testdaten aus einem Textdokument.
+ * Helferklasse zum Laden und Speichern von Testdaten aus Textdokumenten.
  * 
  * @author Eric Walter
  */
@@ -49,7 +49,7 @@ public class LoadAndSaveHelper {
 	public void speichereDaten() throws IOException {
 		FileWriter fw = new FileWriter(new File("src/daten/testdaten2.txt"));
 		for(Lagerbar l : liste) {
-			fw.write(" " + l.toString() + "\n");
+			fw.write(l.toString() + "\n");
 		}
 		fw.close();
 	}

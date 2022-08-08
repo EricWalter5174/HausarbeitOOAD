@@ -1,5 +1,6 @@
 /**
  * Viewklasse für Lagerbar-Objekte, um aktualisierte Daten an das UI zur Darstellung weiterzugeben.
+ * Das View gibt außerdem Nutzerinteraktionen an die Verwaltung weiter.
  * 
  * @author Giuseppe Buccellato, Eric Walter
  */
@@ -66,8 +67,8 @@ public class LagerbarView {
 		Applikation.getInstance().getVerwaltung().aendernButtonClick(id);
 	}
 
-	public void entfernenButtonClick() {
-		//Applikation.getInstance().getVerwaltung().entfernenButtonClick();		
+	public void entfernenButtonClick(int id) {
+		Applikation.getInstance().getVerwaltung().entfernenButtonClick(id);		
 	}
 	
 	/**
@@ -77,19 +78,28 @@ public class LagerbarView {
 	public void hinzuDialogOeffnen() {
 		this.dialogboxHinzu = new DialogboxHinzu("Eintrag hinzufügen", true, orte);
 		this.dialogboxHinzu.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		this.dialogboxHinzu.setLocationRelativeTo(null);
 		this.dialogboxHinzu.setVisible(true);
 	}
 	
 	public void aendernDialogOeffnen(Lagerbar lagerbar, ArrayList<Lagerort> orte) {
 		this.dialogboxAendern = new DialogboxAendern("Eintrag " + lagerbar.getName() + " bearbeiten", true, orte, lagerbar);
 		this.dialogboxAendern.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		this.dialogboxAendern.setLocationRelativeTo(null);
 		this.dialogboxAendern.setVisible(true);
 	}
 	
+	public void entfernenDialogOeffnen(Lagerbar lagerbar) {
+		this.dialogboxEntfernen = new DialogboxEntfernen("Eintrag " + lagerbar.getName() + " entfernen", true, lagerbar);
+		this.dialogboxEntfernen.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		this.dialogboxEntfernen.setLocationRelativeTo(null);
+		this.dialogboxEntfernen.setVisible(true);
+	}
+	
 	/**
-	 * Ein neu erstelltes Lagerbar-Objekt wird an die Verwaltung vermittelt,
+	 * Ein neu erstelltes Lagerbar-Objekt oder eine ID zum Entfernen
+	 * wird an die Verwaltung vermittelt,
 	 * die das LagerbarModel über die Änderung informiert.
-	 * @param lagerbar
 	 */
 	public void registriereNeuesLagerbar(Lagerbar lagerbar) {
 		Applikation.getInstance().getVerwaltung().registriereNeuesLagerbar(lagerbar);
@@ -97,6 +107,10 @@ public class LagerbarView {
 	
 	public void registriereAenderungAnEintrag(Lagerbar lagerbar) {
 		Applikation.getInstance().getVerwaltung().registriereAenderung(lagerbar);
+	}
+	
+	public void registriereEntfernen(int id) {
+		Applikation.getInstance().getVerwaltung().registriereEntfernen(id);
 	}
 	
 	/**

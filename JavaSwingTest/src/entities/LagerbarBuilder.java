@@ -110,7 +110,6 @@ public class LagerbarBuilder {
 		} catch (NumberFormatException e) {
 	    	return false; 						//String enthält keinen Double
 		}
-	  	
 	}
 	
 	public static boolean isDate(String s) {
@@ -131,6 +130,5 @@ public class LagerbarBuilder {
 		} catch (NumberFormatException e) {
 	    	return false; 
 		}
-	  	
 	}
 }

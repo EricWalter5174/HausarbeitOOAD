@@ -1,5 +1,9 @@
 /**
  * Simple Java-Entität für Lagerbar-Objekte
+ * Enthält einen static AtomicInteger, um hinzugefügte Objekte jeweils mit
+ * inkrementierenden IDs zu versehen.
+ * Neue Objekte werden mithilfe des LagerbarBuilder neu erzeugt
+ * und vom LagerbarModel verwaltet.
  * 
  * @author Giuseppe Buccellato, Eric Walter
  */
@@ -10,7 +14,7 @@ import java.time.LocalDate;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Lagerbar {
-	private static final AtomicInteger count = new AtomicInteger(0); //inkrementelle ID für jeden Eintrag, Threadsafe
+	private static AtomicInteger count = new AtomicInteger(0); //inkrementelle ID für jeden Eintrag, Threadsafe
 	private int id;
 	private String name;
 	private Lagerort lagerort;
@@ -27,8 +31,28 @@ public class Lagerbar {
 		this.kategorie = kategorie;
 	}
 
+	/**
+	 * Automatisch inkrementierender static Counter für Einträge.
+	 */
 	public static int incrementId() {
 		return count.incrementAndGet();
+	}
+	
+	/**
+	 * Methode, um bei Löschung von Objekten den Counter zu aktualisieren.
+	 * @param newCount
+	 */
+	public static void setCount(int newCount) {
+		Lagerbar.count.set(newCount);
+	}
+	
+	/**
+	 * Individueller Setter, um bei Änderung eines Eintrags die
+	 * bereits vorhandene ID zu bewahren.
+	 * @param id
+	 */
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	public int getId() {
@@ -61,9 +85,10 @@ public class Lagerbar {
 	}
 	
 	/**
-	 * Generiert einen Datum-String ohne Bindestriche
+	 * Generiert einen Datum-String ohne Bindestriche.
+	 * Für das Abspeichern in der Outputdatei, damit das gleiche
+	 * Format wie beim Input bewahrt bleibt. 
 	 * @param str
-	 * @return 
 	 */
 	public static String formatDateString(String str) {
 		return str.replace("-", "");
