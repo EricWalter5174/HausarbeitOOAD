@@ -1,5 +1,7 @@
 /**
- * Simple Java-Klasse für Lagerorte, die vom Nutzer erstellt werden können sollen
+ * Simple Java-Klasse für Lagerorte, die vom Nutzer erstellt werden können sollen.
+ * Lagerorte werden zur Laufzeit dynamisch erzeugt, 
+ * nachdem sie aus der Inputdatei eingelesen wurden.
  * 
  * @author Giuseppe Buccellato, Eric Walter
  */

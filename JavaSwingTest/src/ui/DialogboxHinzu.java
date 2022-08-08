@@ -50,7 +50,7 @@ public class DialogboxHinzu extends JDialog {
 	public DialogboxHinzu(String title, boolean modal, ArrayList<Lagerort> orte) {
 		setTitle(title);
 		setModal(modal);
-		setBounds(100, 100, 450, 300);
+		setBounds(0, 0, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -160,7 +160,8 @@ public class DialogboxHinzu extends JDialog {
 	private boolean eingabenVerarbeiten(String name, Object ort, String preis, String verfallsdatum, int kat) {
 			
 		if(name == null || name.isEmpty()) {
-			JOptionPane.showMessageDialog(this, "Name darf nicht leer sein.");
+			JOptionPane.showMessageDialog(this, 
+					"Name darf nicht leer sein.");
 			return false;
 		}
 		
@@ -171,14 +172,16 @@ public class DialogboxHinzu extends JDialog {
 		if(preis == null || preis.isEmpty()) {
 			preis = "0.00";	
 		}else if(!LagerbarBuilder.isDouble(preis)) {
-			JOptionPane.showMessageDialog(this, "Preis bitte im Format '0.00' oder das Feld leer lassen.");
+			JOptionPane.showMessageDialog(this, 
+					"Preis bitte im Format '0.00' oder das Feld leer lassen.");
 			return false;
 		}
 		
 		if(verfallsdatum == null || verfallsdatum.isEmpty()) {
 			verfallsdatum = "00000101";
 		}else if(!LagerbarBuilder.isDate(verfallsdatum)) {
-			JOptionPane.showMessageDialog(this, "Datum bitte im Format 'YYYYMMDD' oder das Feld leer lassen.");
+			JOptionPane.showMessageDialog(this, 
+					"Datum bitte im Format 'YYYYMMDD' oder das Feld leer lassen.");
 			return false;
 		}
 		
@@ -198,30 +201,5 @@ public class DialogboxHinzu extends JDialog {
 		
 		return true;
 	}
-	
-	
-//	/**
-//	 * Hilfsmethoden, um Strings auf verschiedene Datentypen zu prüfen
-//	 */
-//	private boolean isDouble(String str) {
-//	  	try {
-//	      	@SuppressWarnings("unused")			//Weil double x nur geprüft wird
-//	    	double x = Double.parseDouble(str);
-//	      	return true; 						//String enthält Double
-//		} catch (NumberFormatException e) {
-//	    	return false; 						//String enthält keinen Double
-//		}
-//	  	
-//	}
-//	
-//	private boolean isDate(String s) {
-//		try {
-//			@SuppressWarnings("unused")	
-//			LocalDate d = LocalDate.parse(s, DateTimeFormatter.BASIC_ISO_DATE);
-//			return true;
-//		} catch(DateTimeParseException e) {
-//			return false;
-//		}
-//	}
 
 }

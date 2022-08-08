@@ -4,7 +4,7 @@
  * die Bearbeitung. Bei Änderungen soll das LagerbarView informiert werden
  * und ein Update von der Verwaltung fordern. 
  * 
- * @author Giuseppe Buccellato
+ * @author Giuseppe Buccellato, Eric Walter
  */
 
 package entities;

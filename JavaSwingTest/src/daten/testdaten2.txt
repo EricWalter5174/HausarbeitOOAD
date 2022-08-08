@@ -1,5 +1,6 @@
- JoghurtKirsche Kühlschrank 0.6 20231230 1
- Apfel Kühlschrank 0.5 20231230 1
- Fahrradreifen Garage 16.0 00000101 5
- Toilettenpapier Kabuff 2.89 00000101 4
- Mein kleiner Benis Kühlschrank 0.0 00000101 5
+JoghurtKirsche Kühlschrank 0.6 20231230 1
+Apfel Kabuff 0.5 20231230 1
+Fahrradreifen Garage 16.0 00000101 5
+Toilettenpapier Kabuff 2.89 00000101 4
+Monitor Arbeitszimmer 150.0 00000101 5
+Birnenkompott Kühlschrank 1.19 20250604 1

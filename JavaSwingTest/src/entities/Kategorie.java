@@ -1,5 +1,5 @@
 /**
- * Enumeration der Artikelkategorien mit Defaultwert für Ausnahmen oder Tests
+ * Enumeration der Artikelkategorien mit Defaultwert UNDEFINED für Ausnahmen oder Tests
  * 
  * @author Giuseppe Buccellato, Eric Walter
  */

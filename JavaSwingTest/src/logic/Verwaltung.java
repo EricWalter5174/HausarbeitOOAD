@@ -1,7 +1,8 @@
 /**
  * Verwaltungsklasse als Controller zwischen Datenmodell und View.
- * Verwaltung holt sich die Daten aus dem LagerbarModel und gibt diese für die UI-Ausgabe
- * an das LagerbarView weiter.
+ * Verwaltung holt sich die Daten aus dem LagerbarModel 
+ * und gibt diese für die UI-Ausgabe an das LagerbarView weiter.
+ * Die Verwaltung registriert außerdem Nutzereingaben und ordnet Änderungen beim LagerModel an.
  * 
  * @author Giuseppe Buccellato, Eric Walter
  */
@@ -56,10 +57,16 @@ public class Verwaltung {
 		}
 	}
 	
+	public void entfernenButtonClick(int id) {
+		Lagerbar lb = getLagerbarById(id);
+		if(lb != null) {
+			lagerView.entfernenDialogOeffnen(lb);
+		}
+	}
+	
 	/**
-	 * Vermittelt neu erstelltes Lagerbar-Objekt an LagerbarModel
+	 * Vermittelt zu bearbeitendes Objekt an LagerbarModel
 	 * und aktualisiert Datensatz für View.
-	 * @param lagerbar
 	 */
 	public void registriereNeuesLagerbar(Lagerbar lagerbar) {
 		lagerbarModel.insert(lagerbar);
@@ -70,11 +77,27 @@ public class Verwaltung {
 		for(Lagerbar l : lagerbarModel.getListe()) {
 			if(l.getId() == lagerbar.getId()) {
 				lagerbarModel.update(l.getId(), lagerbar);
+				break; //sonst könnte ConcurrentModificationException auftreten
 			}
 		}
 		lagerView.updateView(lagerbarModel.getListe());
 	}
 
+	public void registriereEntfernen(int id) {
+		for(Lagerbar l : lagerbarModel.getListe()) {
+			if(l.getId() == id) {
+				lagerbarModel.remove(id);
+				break; //sonst könnte ConcurrentModificationException auftreten
+			}
+		}
+		lagerView.updateView(lagerbarModel.getListe());
+	}
+	
+	/**
+	 * Findet ein Lagerbar-Objekt anhand einer übergebenen ID.
+	 * @param id
+	 * @return Lagerbar
+	 */
 	private Lagerbar getLagerbarById(int id) {
 		for(Lagerbar l : lagerbarModel.getListe()) {
 			if(l.getId() == id) {
